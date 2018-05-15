@@ -2,6 +2,10 @@
 *.iws
 *.ipr
 .idea/
+.settings/
+.vscode/
+.project
+.classpath
 
 .gradle
 /build/

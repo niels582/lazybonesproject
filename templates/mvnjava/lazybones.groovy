@@ -4,7 +4,7 @@ def props = [:]
 props.groupId = ask("Define value for 'group' [org.example]: ", "org.example", "group")
 props.artifactId=ask("Define value for 'artifact' [artifact]: ", "artifact", "artifact")
 props.version = ask("Define value for 'version' [0.1]: ", "0.1", "version")
-props.pkg= ask("Define value for 'package' [package]: ","mypackage",props.groupId)
+props.pkg= ask("Define value for 'package' [pe.irt.config]: ","mypackage",props.groupId)
 props.message= ask("Hola","min")
 
 processTemplates 'pom.xml', props
