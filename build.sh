@@ -19,4 +19,7 @@ cd build/packages && curl -T $FILEZIP \
   -u$USERBINTRAY:$KEYBINTRAY \
    $URLREPOBINTRAY
 
+lazybones config add bintrayRepositories "niels58/lazybonestest/work"
+lazybones config add bintrayRepositories "pledbrook/lazybones-templates"
+
 #lazybones create mvnjava 1.0 my-java-app
