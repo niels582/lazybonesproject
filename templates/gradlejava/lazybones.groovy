@@ -24,7 +24,7 @@ def contenido= """
         }
     }
 """
-def file = new File("${props.projectName}Application")
+def file = new File("${props.projectName}Application").createNewFile()
 file << contenido
 String packegeDir = props.pkg.replaceAll(/\./, '/')
 moveFileToDirectory(new File(projectDir, "${props.projectName}Application"), new File(projectDir, "src/main/java/$packegeDir"), true)
