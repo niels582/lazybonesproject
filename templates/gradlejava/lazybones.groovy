@@ -24,10 +24,10 @@ def contenido= """
         }
     }
 """
-def file = new File("${props.projectName}Application").createNewFile()
-file << contenido
+//def file = new File("${props.projectName}Application").createNewFile()
+//file << contenido
 String packegeDir = props.pkg.replaceAll(/\./, '/')
-moveFileToDirectory(new File(projectDir, "${props.projectName}Application"), new File(projectDir, "src/main/java/$packegeDir"), true)
+moveFileToDirectory(new File(projectDir, "App.java"), new File(projectDir, "src/main/java/$packegeDir"), true)
 moveFileToDirectory(new File(projectDir, "Greeting.java"), new File(projectDir, "src/main/java/$packegeDir"), true)
 moveFileToDirectory(new File(projectDir, "GreetingController.java"), new File(projectDir, "src/main/java/$packegeDir"), true)
 moveFileToDirectory(new File(projectDir, "application.yml"), new File(projectDir, "src/main/resources/"), true)
@@ -40,7 +40,7 @@ list.each { p ->
 filesProcess.each { p ->
     processTemplates "build.gradle", props
     processTemplates "settings.gradle", props
-    //processTemplates "src/main/java/**/App.java", props
+    processTemplates "src/main/java/**/App.java", props
 
 }
 //props.each { k, v ->
