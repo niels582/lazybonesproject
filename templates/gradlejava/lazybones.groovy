@@ -11,7 +11,7 @@ def filesProcess = ['build.gradle','settings.gradle', 'src/main/java/**/App.java
 
 //creacion archivo principal
 def contenido= """
-    package ${pkg};
+    package ${props.pkg};
 
     import org.springframework.boot.SpringApplication;
     import org.springframework.boot.autoconfigure.SpringBootApplication;
