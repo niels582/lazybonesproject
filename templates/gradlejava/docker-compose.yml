@@ -1,0 +1,16 @@
+---
+version: "2"
+
+networks:
+  devnet:
+    driver: bridge
+services:
+  springboot:
+    container_name: springboot
+    extends:
+      file: base.yml
+      service: springboot
+    ports:
+      - "8080:8080"
+    networks:
+      - devnet

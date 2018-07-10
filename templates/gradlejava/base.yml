@@ -1,0 +1,11 @@
+---
+version: "2"
+services:
+  springboot:
+    image: aws-project-springboot
+    build:
+      context: .
+      args:
+        - JAR_FILE=build/libs/project_1-0.1.0.jar
+    env_file:
+      - .env
