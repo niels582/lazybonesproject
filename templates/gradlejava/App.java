@@ -7,6 +7,6 @@ package ${pkg};
     public class ${projectName}Application {
 
         public static void main(String[] args) {
-            SpringApplication.run(Project1Application.class, args);
+            SpringApplication.run(${projectName}Application.class, args);
         }
     }
