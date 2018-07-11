@@ -6,7 +6,7 @@ networks:
     driver: bridge
 services:
   springboot:
-    container_name: springboot
+    container_name: ${projectName}
     extends:
       file: base.yml
       service: springboot

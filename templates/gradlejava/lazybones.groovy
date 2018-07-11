@@ -1,31 +1,17 @@
 import static org.apache.commons.io.FileUtils.moveFileToDirectory
 
 def props = [:]
-props.version = ask("Define value for 'version' [0.1]: ", "0.1", "version")
-props.pkg = ask("Definir nombre del 'package' [com.intercorp.retail]: ", "pkg")
 props.projectName = ask("Definir nombre del Proyecto: ", "projectName", "projectName")
+props.pkg = ask("Definir nombre del 'package' [com.intercorp.retail]: ", "pkg")
+props.version = ask("Define value for 'version' [0.1]: ", "0.1", "version")
+props.awsId = ask("Define value for 'ID aws' [085763616923]: ", "awsId", "awsId")
+props.awsRegion = ask("Define value for 'region aws' [us-east-1]: ", "us-east-1", "awsRegion")
 // directorios
 def list = ['canonical', 'config', 'entities', 'facade', 'repository', 'rest', 'service', 'task', 'util']
 //process
-def filesProcess = ['build.gradle','settings.gradle', 'src/main/java/**/App.java']
+def filesProcess = ['build.gradle','settings.gradle', 'src/main/java/**/App.java','Jenkinsfile.groovy','base.yml','docker-compose.yml']
 
 //creacion archivo principal
-def contenido= """
-    package ${props.pkg};
-
-    import org.springframework.boot.SpringApplication;
-    import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-    @SpringBootApplication
-    public class ${props.projectName}Application {
-
-        public static void main(String[] args) {
-            SpringApplication.run(Project1Application.class, args);
-        }
-    }
-"""
-//def file = new File("${props.projectName}Application").createNewFile()
-//file << contenido
 String packegeDir = props.pkg.replaceAll(/\./, '/')
 moveFileToDirectory(new File(projectDir, "App.java"), new File(projectDir, "src/main/java/$packegeDir"), true)
 moveFileToDirectory(new File(projectDir, "Greeting.java"), new File(projectDir, "src/main/java/$packegeDir"), true)
@@ -38,11 +24,21 @@ list.each { p ->
 }
 
 filesProcess.each { p ->
-    processTemplates "build.gradle", props
-    processTemplates "settings.gradle", props
-    processTemplates "src/main/java/**/App.java", props
-
+     processTemplates p,props
 }
-//props.each { k, v ->
-//    System.err.println("${k}===>${v}")
-//}
+
+//postbuild
+
+def replace = { File source, String toSearch, String replacement ->
+        source.write(source.text.replaceAll(toSearch, replacement))
+    }
+
+def filebuild = new File(projectDir,"build.gradle")
+replace(filebuild,'&#','\\${')
+replace(filebuild,'#&','\\}')
+
+def filejenkins = new File(projectDir,"Jenkinsfile.groovy")
+replace(filejenkins,'&#','\\${')
+replace(filejenkins,'#&','\\}')
+replace(filejenkins,'&1','\\[\\$')
+replace(filejenkins,'&7','\\\$')

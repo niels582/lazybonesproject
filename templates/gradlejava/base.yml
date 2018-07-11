@@ -2,10 +2,10 @@
 version: "2"
 services:
   springboot:
-    image: aws-project-springboot
+    image: ${projectName}
     build:
       context: .
       args:
-        - JAR_FILE=build/libs/project_1-0.1.0.jar
+        - JAR_FILE=build/libs/${projectName}-${version}.jar
     env_file:
       - .env
